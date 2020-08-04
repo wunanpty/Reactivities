@@ -5,7 +5,7 @@ import ActivityDashboard from '../../features/activities/dashboard/ActivityDashb
 import {observer} from 'mobx-react-lite';
 import {Route, withRouter, RouteComponentProps} from 'react-router-dom';
 import ActivityForm from '../../features/activities/form/ActivityForm';
-import { HomePage } from '../../features/home/HomePage';
+import HomePage from '../../features/home/HomePage';
 import ActivityDetails from '../../features/activities/details/ActivityDetails';
 
 const App: React.FC<RouteComponentProps> = ({location}) => {
