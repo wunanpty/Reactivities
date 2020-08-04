@@ -12,4 +12,5 @@ const LoadingComponent: React.FC<{ inverted?: boolean; content?: string }> = ({
   );
 };
 
+
 export default LoadingComponent;
