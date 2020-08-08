@@ -9,6 +9,16 @@ using Application.Activities;
 using MediatR;
 using FluentValidation.AspNetCore;
 using API.Middleware;
+using Domain;
+using Microsoft.AspNetCore.Identity;
+using Application.Interfaces;
+using Infrastructure.Security;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.IdentityModel.Tokens;
+using System.Text;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Authorization;
 
 namespace API
 {
@@ -36,11 +46,43 @@ namespace API
                 });
             });
             services.AddMediatR(typeof(List.Handler).Assembly);
-            services.AddControllers()
-                .AddFluentValidation(cfg =>
+            // services.AddControllers()
+            //     .AddFluentValidation(cfg =>
+            //     {
+            //         cfg.RegisterValidatorsFromAssemblyContaining<Create>();
+            //     });
+
+            services.AddMvc(opt =>
+           {
+               var policy = new AuthorizationPolicyBuilder().RequireAuthenticatedUser().Build();
+               opt.Filters.Add(new AuthorizeFilter(policy));
+           })
+               .AddFluentValidation(cfg => cfg.RegisterValidatorsFromAssemblyContaining<Create>());
+            // .SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
+
+            var builder = services.AddIdentityCore<AppUser>();
+            var identitiyBuilder = new IdentityBuilder(builder.UserType, builder.Services);
+            identitiyBuilder.AddEntityFrameworkStores<DataContext>();
+            identitiyBuilder.AddSignInManager<SignInManager<AppUser>>();
+
+            // var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(Configuration["TokenKey"]));
+            var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(Configuration["TokenKey"]));
+            services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+                .AddJwtBearer(opt =>
                 {
-                    cfg.RegisterValidatorsFromAssemblyContaining<Create>();
+                    opt.TokenValidationParameters = new TokenValidationParameters
+                    {
+                        ValidateIssuerSigningKey = true,
+                        IssuerSigningKey = key,
+                        ValidateAudience = false,
+                        ValidateIssuer = false
+                    };
                 });
+
+            services.AddScoped<IJwtGenerator, JwtGenerator>();
+            services.AddScoped<IUserAccessor, UserAccessor>();
+
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -49,16 +91,17 @@ namespace API
             app.UseMiddleware<ErrorHandlingMiddleware>();
             if (env.IsDevelopment())
             {
-               // app.UseDeveloperExceptionPage();
+                // app.UseDeveloperExceptionPage();
             }
 
             // app.UseHttpsRedirection();
 
             app.UseRouting();
+            app.UseCors("CorsPolicy");
 
+            app.UseAuthentication();
             app.UseAuthorization();
 
-            app.UseCors("CorsPolicy");
 
             app.UseEndpoints(endpoints =>
             {
