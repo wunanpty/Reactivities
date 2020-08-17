@@ -1,11 +1,12 @@
 import { observable, action, computed, runInAction } from "mobx";
 import { SyntheticEvent } from "react";
-import { IActivity } from "../models/activity";
+import { IActivity, IComment } from "../models/activity";
 import agent from "../api/agent";
 import { history } from "../..";
 import { toast } from "react-toastify";
 import { RootStore } from "./rootStore";
 import { setActivityProps, createAttendee } from "../common/util/util";
+import { HubConnection, HubConnectionBuilder, LogLevel } from '@microsoft/signalr';
 
 export default class ActivityStore {
   // class property
@@ -21,6 +22,57 @@ export default class ActivityStore {
   @observable submitting = false;
   @observable target = "";
   @observable loading = false;
+  @observable.ref hubConnection: HubConnection | null = null;
+
+  @action createHubConnection = (activityId: string) => {
+    this.hubConnection = new HubConnectionBuilder()
+      .withUrl('http://localhost:5000/chat', {
+        accessTokenFactory: () => this.rootStore.commonStore.token!
+      })
+      .configureLogging(LogLevel.Information)
+      .build();
+
+    this.hubConnection
+      .start()
+      .then(() => console.log(this.hubConnection!.state))
+      .then(() => {
+        console.log('Attemping to join group');
+        this.hubConnection!.invoke('AddGroup', activityId)
+      })
+      .catch((error: any) => console.log('Error establishing connection: ', error));
+
+    // receive a  commnent
+    // should be same as in ChatHub.cs "await Clients.All.SendAsync("ReceiveComment", comment);"
+      this.hubConnection.on('ReceiveComment', (comment: IComment) => {
+      runInAction(() => {
+        this.activity!.comments.push(comment)
+      })
+    })
+
+    this.hubConnection.on('Send', message => {
+      toast.info(message);
+    })
+  };
+
+  @action stopHubConnection = () => {
+    this.hubConnection?.invoke('RemoveFromGroup', this.activity!.id)
+    .then(() => {
+      this.hubConnection!.stop()
+    })
+    .then(() => console.log('Connection stopped'))
+    .catch(err => console.log(err))
+    
+  }
+
+  @action addComment = async (values: any) => { // receive value from form
+    values.activityId = this.activity!.id;
+    try {
+      // the name should match ChatHub.cs method name "SendComment"
+      await this.hubConnection!.invoke('SendComment', values)
+    } catch (error) {
+      console.log(error);
+    }
+  } 
 
   @computed get activitiesByDate() {
     return this.groupActivitiesByDate(
@@ -108,6 +160,7 @@ export default class ActivityStore {
       let attendees = [];
       attendees.push(attendee);
       activity.attendees = attendees;
+      activity.comments = [];
       activity.isHost = true;
       runInAction("create activity", () => {
         this.activityRegistry.set(activity.id, activity);
