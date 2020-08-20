@@ -24,6 +24,7 @@ using Infrastructure.Photos;
 using API.SignalR;
 using System.Threading.Tasks;
 using Application.Profiles;
+using System;
 
 namespace API
 {
@@ -48,8 +49,13 @@ namespace API
             {
                 opt.AddPolicy("CorsPolicy", policy =>
                 {
-                    
-                    policy.AllowAnyHeader().AllowAnyMethod().WithOrigins("http://localhost:3000").AllowCredentials();
+
+                    policy
+                        .AllowAnyHeader()
+                        .AllowAnyMethod()
+                        .WithExposedHeaders("WWW-Authenticate")
+                        .WithOrigins("http://localhost:3000")
+                        .AllowCredentials();
                 });
             });
             services.AddMediatR(typeof(List.Handler).Assembly);
@@ -75,13 +81,13 @@ namespace API
             identitiyBuilder.AddEntityFrameworkStores<DataContext>();
             identitiyBuilder.AddSignInManager<SignInManager<AppUser>>();
 
-             services.AddAuthorization(opt => 
-            {
-                opt.AddPolicy("IsActivityHost", policy =>
-                {
-                    policy.Requirements.Add(new IsHostRequirement());
-                });
-            });
+            services.AddAuthorization(opt =>
+           {
+               opt.AddPolicy("IsActivityHost", policy =>
+               {
+                   policy.Requirements.Add(new IsHostRequirement());
+               });
+           });
             services.AddTransient<IAuthorizationHandler, IsHostRequirementHandler>();
 
             // var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(Configuration["TokenKey"]));
@@ -94,12 +100,15 @@ namespace API
                         ValidateIssuerSigningKey = true,
                         IssuerSigningKey = key,
                         ValidateAudience = false,
-                        ValidateIssuer = false
+                        ValidateIssuer = false,
+                        // will validate the expiry of the token 
+                        ValidateLifetime = true,
+                        ClockSkew = TimeSpan.Zero
                     };
 
-                    opt.Events = new JwtBearerEvents 
+                    opt.Events = new JwtBearerEvents
                     {
-                        OnMessageReceived = context => 
+                        OnMessageReceived = context =>
                         {
                             var accessToken = context.Request.Query["access_token"];
                             var path = context.HttpContext.Request.Path;

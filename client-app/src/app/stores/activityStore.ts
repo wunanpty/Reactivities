@@ -1,4 +1,4 @@
-import { observable, action, computed, runInAction, reaction } from "mobx";
+import { observable, action, computed, runInAction, reaction, toJS } from "mobx";
 import { SyntheticEvent } from "react";
 import { IActivity, IComment } from "../models/activity";
 import agent from "../api/agent";
@@ -6,7 +6,7 @@ import { history } from "../..";
 import { toast } from "react-toastify";
 import { RootStore } from "./rootStore";
 import { setActivityProps, createAttendee } from "../common/util/util";
-import { HubConnection, HubConnectionBuilder, LogLevel } from '@microsoft/signalr';
+import { HubConnection, HubConnectionBuilder, LogLevel, HubConnectionState } from '@microsoft/signalr';
 
 const LIMIT = 2;
 
@@ -86,7 +86,9 @@ export default class ActivityStore {
       .then(() => console.log(this.hubConnection!.state))
       .then(() => {
         console.log('Attemping to join group');
-        this.hubConnection!.invoke('AddGroup', activityId)
+        if (this.hubConnection!.state === HubConnectionState.Connected) {
+          this.hubConnection!.invoke('AddGroup', activityId)
+        }
       })
       .catch((error: any) => console.log('Error establishing connection: ', error));
 
@@ -187,10 +189,10 @@ export default class ActivityStore {
 
   @action loadActivity = async (id: string) => {
     let activity = this.getActivity(id);
-    // if in memory
+    // if in memory/cache
     if (activity) {
       this.activity = activity;
-      return activity;
+      return toJS(activity);
     } else {
       // not in memory, we get it from API
       this.loadingInitial = true;
