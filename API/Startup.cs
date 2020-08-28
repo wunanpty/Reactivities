@@ -146,7 +146,9 @@ namespace API
             services.AddScoped<IUserAccessor, UserAccessor>();
             services.AddScoped<IPhotoAccessor, PhotoAccessor>();
             services.AddScoped<IProfileReader, ProfileReader>();
+            services.AddScoped<IFacebookAccessor, FacebookAccessor>();
             services.Configure<CloudinarySettings>(Configuration.GetSection("Cloudinary"));
+            services.Configure<FacebookAppSettings>(Configuration.GetSection("Authentication:Facebook"));
 
         }
 
@@ -179,6 +181,7 @@ namespace API
                     .FrameAncestors(s => s.Self())
                     .ImageSources(s => s.Self().CustomSources("https://res.cloudinary.com", "blob:", "data:"))
                     .ScriptSources(s => s.Self().CustomSources("sha256-ma5XxS1EBgt17N22Qq31rOxxRWRfzUTQS1KOtfYwuNo="))
+                    // .ScriptSources(s => s.Self().CustomSources("https://connect.facebook.net/en_US/sdk.js"))
             );
 
             app.UseDefaultFiles();
