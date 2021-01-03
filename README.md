@@ -2,6 +2,7 @@
 Learned from Udemy course: Complete guide to building an app with .Net Core and React
 Deployed to Azure and Linux:
 https://reactivitiesplus.azurewebsites.net/
+
 http://167.71.116.142/
 
 
