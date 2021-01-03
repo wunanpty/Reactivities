@@ -1,5 +1,9 @@
 # Reactivities
 Learned from Udemy course: Complete guide to building an app with .Net Core and React
+Deployed to Azure and Linux:
+https://reactivitiesplus.azurewebsites.net/
+http://167.71.116.142/
+
 
 •	Built a Web API in .Net Core with Clean Architecture using the CQRS + Mediator pattern.
 
