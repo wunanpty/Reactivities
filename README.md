@@ -48,16 +48,22 @@ A web application focus on social activities. User can register/login/logout. Us
 - Because of our DTOs: data transfer object.  Allow us to shape the type of data that we are returning because our activities are going to have users as attendees, we do not want to send back the full User object. Instead, we want to shape the data in a different way and to help us map our properties from our entities to our DTOs.
 - AutoMapper: help us take away some of the tedious mapping code we would need to write to map properties in our entities to our DTOs. Any properties that it finds in both objects that have the same name are automatically going to map them for us.
 
-## Why use ASP.NET Core Identiy?
+### Why use ASP.NET Core Identiy?
 - It is a membership system, supports login stored in Identity, supports external providers, comes with default user stores, has UserManager and SignInManager
 
-## What is JWT?
+### What is JWT?
 - JWT is Json Web Token. It made up of three parts: header, payloads and signature.
 - The token is sent back to the client in the form of just a long string separated by three periods. This token is passed to the client. Then when the client wants to access a resource on the server it sends this token every time.
 - Keep the token as small as possible because it's going to go along with your request to the API.
 - Signature component the third part of this token, this is what our server uses to verify that this token is valid and hasn't been modified or manipulated in any way. Tokens are signed with a secret key that we stored on the server and we never send to the client, so in order to verify it this token is valid then all our server has to do is to check the secret key that we leave on our server. Compare it to this signature.
 
-### Used Entity Framework Core as the Object Relational Mapper. 
-### Switched DB provider for Entity Framwork between Sqlite, MySql and SQL.
-### Implemented token-based registration/login/logout using .Net Core Identity
+### Axios
+- Axios is an hugely popular (over 52k stars on Github) HTTP client that allows us to make GET and POST requests from the browser. Therefore, we can use Axios with React to make requests to an API, return data from the API, and then do things with that data in our React app.
+- Use [Axios libray](https://github.com/axios/axios) to request http.
 
+### Semantic UI
+- [Semantic UI](https://react.semantic-ui.com/)
+
+### MobX
+- State management system. API is pretty small. There are only four methods from MobX: Observable, Action, Computed, and Reaction.
+- We are going to be using for our store is the Observer. We are going to get this from a separate package called mobx-react-lite. And this provides a higher-order component and we can use this higher-order component to make our React Components observers of our store and whenever that component is an observer of a store. Any changes to any of the observables are going to be observed our right.
