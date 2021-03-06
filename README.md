@@ -23,15 +23,17 @@ A web application focus on social activities. User can register/login/logout. Us
 
 
 ### Built a Web API in .Net Core with Clean Architecture using the CQRS + Mediator pattern.
-- CQRS is Command Query Responsibility Segregation pattern. Implementing CQRS in your application can maximize its performance, scalability, and security. The flexibility created by migrating to CQRS allows a system to better evolve over time and prevents update commands from causing merge conflicts at the domain level.
-- CQRS is more concerned about the flow of our data. 
-- Commands are going to use our domain and our persistence layer to update our database. 
-- Query only concerned with retrieving data from the database.
+- CQRS
+  - CQRS is Command Query Responsibility Segregation pattern. Implementing CQRS in your application can maximize its performance, scalability, and security. The flexibility created by migrating to CQRS allows a system to better evolve over time and prevents update commands from causing merge conflicts at the domain level.
+  - CQRS is more concerned about the flow of our data. 
+  - Commands are going to use our domain and our persistence layer to update our database. 
+  - Query only concerned with retrieving data from the database.
 
-
-Mediator pattern is used to reduce communication complexity between multiple objects or classes. This pattern provides a mediator class which normally handles all the communications between different classes and supports easy maintenance of the code by loose coupling.  With the mediator pattern, communication between objects is encapsulated within a mediator object. Objects no longer communicate directly with each other, but instead communicate through the mediator. This reduces the dependencies between communicating objects, thereby reducing coupling.
-A good example to demonstrates mediator pattern is, the control tower at an airport. The pilots of the planes approaching or departing the terminal area communicate with the tower rather than explicitly communicating with one another. The constraints on who can take off or land are enforced by the tower. 
-Here in my project, the communication between our API (which is controller) and our application (handler), is a many-to-many relationship. MediatR library is an open source implementation of mediator pattern for .NET applications. We got decoupled requests and handlers that controlled by the mediator. Also, we got thin controller and approach to use CQRS principle.
+- Mediator
+  - Mediator pattern is used to reduce communication complexity between multiple objects or classes. This pattern provides a mediator class which normally handles all the communications between different classes and supports easy maintenance of the code by loose coupling.  With the mediator pattern, communication between objects is encapsulated within a mediator object. Objects no longer communicate directly with each other, but instead communicate through the mediator. This reduces the dependencies between communicating objects, thereby reducing coupling.
+  - A good example to demonstrates mediator pattern is, the control tower at an airport. The pilots of the planes approaching or departing the terminal area communicate with the tower rather than explicitly communicating with one another. The constraints on who can take off or land are enforced by the tower. 
+  - Here in my project, the communication between our API (which is controller) and our application (handler), is a many-to-many relationship. 
+  - MediatR library is an open source implementation of mediator pattern for .NET applications. We got decoupled requests and handlers that controlled by the mediator. Also, we got thin controller and approach to use CQRS principle.
 
 ### Used AutoMapper and MediatR in the .Net projects. 
 ### Used Entity Framework Core as the Object Relational Mapper. 
