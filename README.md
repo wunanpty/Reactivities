@@ -1,5 +1,5 @@
 # Reactivities
-A web application focus on social activities. User can register/login/logout. User can upload photo and create user profile page. User can post an activity. User can attend other's activities. User can follow/unfollow other people. User can chat with people.
+A web application focus on social activities. User can register/login/logout. Users can upload a photo and create a user profile page. Users can post an activity. Users can attend to other's activities. Users can follow/unfollow other people. Users can chat with people.
 - Learned from [Udemy Course](https://www.udemy.com/course/complete-guide-to-building-an-app-with-net-core-and-react/): Complete guide to building an app with .Net Core and React
 - Deployed to [Azure](https://reactivitiesplus.azurewebsites.net/)
 - Deployed to [Linux](http://167.71.116.142/)
@@ -10,9 +10,9 @@ A web application focus on social activities. User can register/login/logout. Us
 - Front End: React
 - CQRS Architecutre + Meidator pattern, MediatR
 - Entity Framework Core
-- Sqlit, MySql, SQL
+- SQLite, MySql, SQL
 - .Net Core Identity, JWT
-- Following/Follwoer, Paging/Sorting/Filtering
+- Following/Follower, Paging/Sorting/Filtering
 - Photo Upload
 - ASPNET Core SignalR
 - Security
