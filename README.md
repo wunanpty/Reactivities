@@ -4,7 +4,7 @@ A web application focus on social activities. User can register/login/logout. Us
 - Deployed to [Azure](https://reactivitiesplus.azurewebsites.net/)
 - Deployed to [Linux](http://167.71.116.142/)
 
-## The C#/.NET/React technologies use in this project includs:
+## The C#/.NET/React technologies used in this project include:
 - Multi-project solution
 - Back End: .Net Core
 - Front End: React
@@ -16,6 +16,10 @@ A web application focus on social activities. User can register/login/logout. Us
 - Photo Upload
 - ASPNET Core SignalR
 - Security
+- Typescript
+- React Router
+- Semantic UI
+- React Final Form
 
 
 ## Built a Web API in .Net Core with Clean Architecture using the CQRS + Mediator pattern.
