@@ -35,29 +35,29 @@ A web application focus on social activities. User can register/login/logout. Us
   - Here in my project, the communication between our API (which is controller) and our application (handler), is a many-to-many relationship. 
   - MediatR library is an open source implementation of mediator pattern for .NET applications. We got decoupled requests and handlers that controlled by the mediator. Also, we got thin controller and approach to use CQRS principle.
 
-### Used AutoMapper and MediatR in the .Net projects. 
-### Used Entity Framework Core as the Object Relational Mapper. 
-### Switched DB provider for Entity Framwork between Sqlite, MySql and SQL.
-
-## Why use Entity Framework Core?
-When you develop a new application, your data model changes frequently, and each time the model changes, it gets out of sync with the database. You started these tutorials by configuring the Entity Framework to create the database if it doesn't exist. Then each time you change the data model -- add, remove, or change entity classes or change your DbContext class -- you can delete the database and EF creates a new one that matches the model, and seeds it with test data. 
-Another reason why use Entity Framework. Entity Framework core can access many different databases through plug-in libraries called database providers. 
+### Why use Entity Framework Core?
+- Used Entity Framework Core as the Object Relational Mapper
+- When you develop a new application, your data model changes frequently, and each time the model changes, it gets out of sync with the database. Entity Framework can be configured to create the database if it doesn't exist. Then each time you change the data model -- add, remove, or change entity classes or change your DbContext class. You can delete the database and EF creates a new one that matches the model, and seeds it with test data. 
+- Another reason why use Entity Framework. Entity Framework core can access many different databases through plug-in libraries called database providers. 
 (detail: define connection string for mysql in appsettings.json. in Startup.cs separate Development mode using sqlite, Production mode using mysql or sql)
 
-## Why use aysn method when query DB?
-Because they have potential to be long running queries is to always make them asynchronous it's a very very very minimal performance hit to do so and this also makes our application instantly more scalable because when we make a request to our database and we make the method an async method then this is going to pass the database query to a different thread and it's not going to block the threads where they get request is coming in on.
+### Why use aysn method when query DB?
+- Because they have the potential to be long-running, queries are to always make them asynchronous. It's a very minimal performance hit to do so. And this also makes our application instantly more scalable, because when we make a request to our database and we make the method an async method, then this is going to pass the database query to a different thread, and it's not going to block the threads where they get request is coming in on.
 
-## Why use AutoMapper?
-Because our DTOs: data transfer object. allow us to shape the type of data that we are returning because our activities are going to have users as attendees, we do not want to send back the full User object. Instead we want to shape the data in a different way and to help us map our properties from our entities to our DTOs.
-AutoMapper: help us take away some of the tedious mapping code we would need to write to map of properties in our entities to our DTOs. Any properties that it finds in both objects that have the same name is automatically going to map them for us.
-
-•	Implemented token-based registration/login/logout using .Net Core Identity
+### Why use AutoMapper?
+- Because of our DTOs: data transfer object.  Allow us to shape the type of data that we are returning because our activities are going to have users as attendees, we do not want to send back the full User object. Instead, we want to shape the data in a different way and to help us map our properties from our entities to our DTOs.
+- AutoMapper: help us take away some of the tedious mapping code we would need to write to map properties in our entities to our DTOs. Any properties that it finds in both objects that have the same name are automatically going to map them for us.
 
 ## Why use ASP.NET Core Identiy?
-It is a membership system, supports login stored in Identity, supports external providers, comes with default user stores, has UserManager and SignInManager
+- It is a membership system, supports login stored in Identity, supports external providers, comes with default user stores, has UserManager and SignInManager
 
 ## What is JWT?
-JSON web token. It made up of three parts: header, payloads and signature.
-The token is sent back to the client in the form of just a long string separated by three periods. This token is passed to the client. Then when the client wants to access a resource on the server it sends this token every time.
-Keep the token as small as possible because it's going to go along with your request to the API.
-Signature component the third part of this token, this is what our server uses to verify that this token is valid and hasn't been modified or manipulated in any way. Tokens are signed with a secret key that we stored on the server and we never send to the client, so in order to verify it this token is valid then all our server has to do is to check the secret key that we leave on our server. Compare it to this signature.
+- JWT is Json Web Token. It made up of three parts: header, payloads and signature.
+- The token is sent back to the client in the form of just a long string separated by three periods. This token is passed to the client. Then when the client wants to access a resource on the server it sends this token every time.
+- Keep the token as small as possible because it's going to go along with your request to the API.
+- Signature component the third part of this token, this is what our server uses to verify that this token is valid and hasn't been modified or manipulated in any way. Tokens are signed with a secret key that we stored on the server and we never send to the client, so in order to verify it this token is valid then all our server has to do is to check the secret key that we leave on our server. Compare it to this signature.
+
+### Used Entity Framework Core as the Object Relational Mapper. 
+### Switched DB provider for Entity Framwork between Sqlite, MySql and SQL.
+### Implemented token-based registration/login/logout using .Net Core Identity
+
