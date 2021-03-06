@@ -1,10 +1,21 @@
 # Reactivities
+A web application focus on social activities. User can register/login/logout. User can upload photo and create user profile page. User can post an activity. User can attend other's activities. User can follow/unfollow other people. User can chat with people.
 - Learned from [Udemy Course](https://www.udemy.com/course/complete-guide-to-building-an-app-with-net-core-and-react/): Complete guide to building an app with .Net Core and React
 - Deployed to [Azure](https://reactivitiesplus.azurewebsites.net/)
 - Deployed to [Linux](http://167.71.116.142/)
 
-
-
+## The C#/.NET/React technologies use in this project includs:
+- Multi-project solution
+- Back End: .Net Core
+- Front End: React
+- CQRS Architecutre + Meidator pattern, MediatR
+- Entity Framework Core
+- Sqlit, MySql, SQL
+- .Net Core Identity, JWT
+- Following/Follwoer, Paging/Sorting/Filtering
+- Photo Upload
+- ASPNET Core SignalR
+- Security
 
 
 ## Built a Web API in .Net Core with Clean Architecture using the CQRS + Mediator pattern.
