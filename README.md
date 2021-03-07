@@ -67,3 +67,12 @@ A web application focus on social activities. User can register/login/logout. Us
 ### MobX
 - State management system. API is pretty small. There are only four methods from MobX: Observable, Action, Computed, and Reaction.
 - We are going to be using for our store is the Observer. We are going to get this from a separate package called mobx-react-lite. And this provides a higher-order component and we can use this higher-order component to make our React Components observers of our store and whenever that component is an observer of a store. Any changes to any of the observables are going to be observed our right.
+
+### React Router
+- When it comes to reacts there's normally a lot of decisions to be made about which packages you're going to use to help you build your application. What's the assessed framework. What state management solution. What forms library you're going to use. But when it comes to rooting that decision is a lot easier. The community has settled pretty much on just one particular rooting solution and that is the [React Router](https://reactrouter.com/web/api/BrowserRouter), because we're building a web application, we're going to use react router dom.
+
+### Validation and Error handling
+- Validation in our API is essential. We want to protect our server from receiving bad data from the client and the way that we can do that is by validating the data that is sent from the client to our server.
+We can use [Fluent Validation](https://fluentvalidation.net/) to validate data.
+Due to the nature of our application architecture and the fact that we want to use extremely thin API controllers that means our API controllers are going to be dumb, they're not going to be responsible for throwing exceptions or handling validation or anything like that. They're still just going to be that simple dumb API controllers. Our error handling and exception handling logic is going to need to move into our application project. It's our business logic that's going to define whether a request has an error or not on the client-side.
+- Validation on the client is nice to have, we should definitely include it. But it is not as important as validating the data on the server. Use [Revalidate](https://github.com/jfairbank/revalidate) and [combineValidators](http://revalidate.jeremyfairbank.com/usage/combineValidators.html)
