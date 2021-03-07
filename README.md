@@ -68,6 +68,7 @@ A web application focus on social activities. User can register/login/logout. Us
 ### Axios
 - Axios is an hugely popular (over 52k stars on Github) HTTP client that allows us to make GET and POST requests from the browser. Therefore, we can use Axios with React to make requests to an API, return data from the API, and then do things with that data in our React app.
 - Use [Axios libray](https://github.com/axios/axios) to request http.
+- Axios interceptors：For every single request where we have a token, we're going to want to send that along with our request to our API so that we can authenticate to our API server.
 
 ### Semantic UI
 - [Semantic UI](https://react.semantic-ui.com/)
