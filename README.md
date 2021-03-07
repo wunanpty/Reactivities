@@ -49,13 +49,21 @@ A web application focus on social activities. User can register/login/logout. Us
 - AutoMapper: help us take away some of the tedious mapping code we would need to write to map properties in our entities to our DTOs. Any properties that it finds in both objects that have the same name are automatically going to map them for us.
 
 ### Why use ASP.NET Core Identiy?
-- It is a membership system, supports login stored in Identity, supports external providers, comes with default user stores, has UserManager and SignInManager
+- Membership system
+- Supports login stored in Identity
+- Supports external providers
+- Comes with default user stores
+- UserManager
+- SignInManager
 
 ### What is JWT?
 - JWT is Json Web Token. It made up of three parts: header, payloads and signature.
 - The token is sent back to the client in the form of just a long string separated by three periods. This token is passed to the client. Then when the client wants to access a resource on the server it sends this token every time.
 - Keep the token as small as possible because it's going to go along with your request to the API.
 - Signature component the third part of this token, this is what our server uses to verify that this token is valid and hasn't been modified or manipulated in any way. Tokens are signed with a secret key that we stored on the server and we never send to the client, so in order to verify it this token is valid then all our server has to do is to check the secret key that we leave on our server. Compare it to this signature.
+- The infrastructure project is responsible for the generation of tokens. Anything related to security will run inside the infrastructure project.
+- A [JWT decoder](https://jwt.io/#debugger-io)
+- Authentication (who are you?), Authorization (are you allowed?)
 
 ### Axios
 - Axios is an hugely popular (over 52k stars on Github) HTTP client that allows us to make GET and POST requests from the browser. Therefore, we can use Axios with React to make requests to an API, return data from the API, and then do things with that data in our React app.
