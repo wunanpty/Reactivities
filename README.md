@@ -85,3 +85,14 @@ A web application focus on social activities. User can register/login/logout. Us
 We can use [Fluent Validation](https://fluentvalidation.net/) to validate data.
 Due to the nature of our application architecture and the fact that we want to use extremely thin API controllers that means our API controllers are going to be dumb, they're not going to be responsible for throwing exceptions or handling validation or anything like that. They're still just going to be that simple dumb API controllers. Our error handling and exception handling logic is going to need to move into our application project. It's our business logic that's going to define whether a request has an error or not on the client-side.
 - Validation on the client is nice to have, we should definitely include it. But it is not as important as validating the data on the server. Use [Revalidate](https://github.com/jfairbank/revalidate) and [combineValidators](http://revalidate.jeremyfairbank.com/usage/combineValidators.html)
+
+### Photo Upload
+- Photo storage options
+  - Database: Inefficient. Stores files as BLOBs. Disk space is an issue. Authentication is easy.
+  - File System: Good for storing files. Disk space is an issue. File permissions.
+  - Cloud Service: Scalable. Could be more expensive. Secured with API Key.
+- Here we use cloud service, we use [Cloudinary](https://cloudinary.com/documentation/dotnet_integration#dotnet_getting_started_guide). Because it does provide us with an API key and an API secrets, and we can make sure our users are authenticated with our API before we allow them to upload the photo to cloudinary.
+- And because we use cloud service, then we do not need to worry about disk space. And it is very scalable. And because it is a service that specialized in delivering files over a distributed network, then it is potentially faster than how we can serve them ourselves.
+- Client side use [React Dropzone](https://react-dropzone.js.org/) and [React Cropper](https://github.com/react-cropper/react-cropper)
+
+
