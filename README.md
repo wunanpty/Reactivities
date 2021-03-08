@@ -11,7 +11,7 @@ A web application focus on social activities. User can register/login/logout. Us
 - [CQRS Architecture](https://docs.microsoft.com/en-us/azure/architecture/patterns/cqrs) + Mediator pattern, [MediatR](https://github.com/jbogard/MediatR)
 - [Entity Framework Core](https://docs.microsoft.com/en-us/ef/core/)
 - SQLite, MySql, SQL
-- [.Net Core Identity](https://docs.microsoft.com/en-us/aspnet/core/security/authentication/identity?view=aspnetcore-5.0&tabs=visual-studio), JWT
+- [ASP.NET Core Identiy](https://docs.microsoft.com/en-us/aspnet/core/security/authentication/identity?view=aspnetcore-5.0&tabs=visual-studio), JWT
 - Following/Follower, Paging/Sorting/Filtering
 - Photo Upload
 - [ASPNET Core SignalR](https://docs.microsoft.com/en-us/aspnet/core/signalr/introduction?view=aspnetcore-5.0)
