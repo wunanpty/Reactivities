@@ -8,17 +8,17 @@ A web application focus on social activities. User can register/login/logout. Us
 - Multi-project solution
 - Back End: .Net Core
 - Front End: React
-- CQRS Architecutre + Meidator pattern, MediatR
-- Entity Framework Core
+- [CQRS Architecture](https://docs.microsoft.com/en-us/azure/architecture/patterns/cqrs) + Mediator pattern, [MediatR](https://github.com/jbogard/MediatR)
+- [Entity Framework Core](https://docs.microsoft.com/en-us/ef/core/)
 - SQLite, MySql, SQL
 - .Net Core Identity, JWT
 - Following/Follower, Paging/Sorting/Filtering
 - Photo Upload
-- ASPNET Core SignalR
+- [ASPNET Core SignalR](https://docs.microsoft.com/en-us/aspnet/core/signalr/introduction?view=aspnetcore-5.0)
 - Security
 - Typescript
 - React Router
-- Semantic UI
+- [Semantic UI](https://react.semantic-ui.com/)
 - React Final Form
 
 
@@ -69,9 +69,6 @@ A web application focus on social activities. User can register/login/logout. Us
 - Axios is an hugely popular (over 52k stars on Github) HTTP client that allows us to make GET and POST requests from the browser. Therefore, we can use Axios with React to make requests to an API, return data from the API, and then do things with that data in our React app.
 - Use [Axios libray](https://github.com/axios/axios) to request http.
 - Axios interceptors：For every single request where we have a token, we're going to want to send that along with our request to our API so that we can authenticate to our API server.
-
-### Semantic UI
-- [Semantic UI](https://react.semantic-ui.com/)
 
 ### MobX
 - State management system. API is pretty small. There are only four methods from MobX: Observable, Action, Computed, and Reaction.
