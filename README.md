@@ -11,15 +11,15 @@ A web application focus on social activities. User can register/login/logout. Us
 - [CQRS Architecture](https://docs.microsoft.com/en-us/azure/architecture/patterns/cqrs) + Mediator pattern, [MediatR](https://github.com/jbogard/MediatR)
 - [Entity Framework Core](https://docs.microsoft.com/en-us/ef/core/)
 - SQLite, MySql, SQL
-- .Net Core Identity, JWT
+- [.Net Core Identity](https://docs.microsoft.com/en-us/aspnet/core/security/authentication/identity?view=aspnetcore-5.0&tabs=visual-studio), JWT
 - Following/Follower, Paging/Sorting/Filtering
 - Photo Upload
 - [ASPNET Core SignalR](https://docs.microsoft.com/en-us/aspnet/core/signalr/introduction?view=aspnetcore-5.0)
 - Security
 - Typescript
-- React Router
+- [React Router](https://reactrouter.com/web/guides/quick-start)
 - [Semantic UI](https://react.semantic-ui.com/)
-- React Final Form
+- [React Final Form](https://final-form.org/docs/react-final-form/getting-started)
 
 
 ### Built a Web API in .Net Core with Clean Architecture using the CQRS + Mediator pattern.
@@ -27,19 +27,19 @@ A web application focus on social activities. User can register/login/logout. Us
   - CQRS is Command Query Responsibility Segregation pattern. Implementing CQRS in your application can maximize its performance, scalability, and security. The flexibility created by migrating to CQRS allows a system to better evolve over time and prevents update commands from causing merge conflicts at the domain level.
   - CQRS is more concerned about the flow of our data. 
   - Commands are going to use our domain and our persistence layer to update our database. 
-  - Query only concerned with retrieving data from the database.
+  - Queries are only concerned with retrieving data from the database.
 
 - Mediator
-  - Mediator pattern is used to reduce communication complexity between multiple objects or classes. This pattern provides a mediator class which normally handles all the communications between different classes and supports easy maintenance of the code by loose coupling.  With the mediator pattern, communication between objects is encapsulated within a mediator object. Objects no longer communicate directly with each other, but instead communicate through the mediator. This reduces the dependencies between communicating objects, thereby reducing coupling.
-  - A good example to demonstrates mediator pattern is, the control tower at an airport. The pilots of the planes approaching or departing the terminal area communicate with the tower rather than explicitly communicating with one another. The constraints on who can take off or land are enforced by the tower. 
-  - Here in my project, the communication between our API (which is controller) and our application (handler), is a many-to-many relationship. 
-  - MediatR library is an open source implementation of mediator pattern for .NET applications. We got decoupled requests and handlers that controlled by the mediator. Also, we got thin controller and approach to use CQRS principle.
+  - Mediator pattern is used to reduce communication complexity between multiple objects or classes. This pattern provides a mediator class that normally handles all the communications between different classes and supports easy maintenance of the code by loose coupling.  With the mediator pattern, communication between objects is encapsulated within a mediator object. Objects no longer communicate directly with each other, but instead, communicate through the mediator. This reduces the dependencies between communicating objects, thereby reducing coupling.
+  - A good example to demonstrates a mediator pattern is, the control tower at an airport. The pilots of the planes approaching or departing the terminal area communicate with the tower rather than explicitly communicating with one another. The constraints on who can take off or land are enforced by the tower. 
+  - Here is my project, the communication between our API (which is the controller) and our application (handler), is a many-to-many relationship. 
+  - MediatR library is an open-source implementation of mediator patterns for .NET applications. We got decoupled requests and handlers that were controlled by the mediator. Also, we got a thin controller and approach to use the CQRS principle.
 
 ### Why use Entity Framework Core?
 - Used Entity Framework Core as the Object Relational Mapper
-- When you develop a new application, your data model changes frequently, and each time the model changes, it gets out of sync with the database. Entity Framework can be configured to create the database if it doesn't exist. Then each time you change the data model -- add, remove, or change entity classes or change your DbContext class. You can delete the database and EF creates a new one that matches the model, and seeds it with test data. 
+- When you develop a new application, your data model changes frequently, and each time the model changes, it gets out of sync with the database. Entity Framework can be configured to create the database if it doesn't exist. Then each time you change the data model -- add, remove, or change entity classes or change your DbContext class. You can delete the database and EF creates a new one that matches the model and seeds it with test data. 
 - Another reason why use Entity Framework. Entity Framework core can access many different databases through plug-in libraries called database providers. 
-(detail: define connection string for mysql in appsettings.json. in Startup.cs separate Development mode using sqlite, Production mode using mysql or sql)
+(detail: define connection string for MySQL in appsettings.json. in Startup.cs separate Development mode using SQLite, Production mode using MySQL or SQL)
 
 ### Why use aysn method when query DB?
 - Because they have the potential to be long-running, queries are to always make them asynchronous. It's a very minimal performance hit to do so. And this also makes our application instantly more scalable, because when we make a request to our database and we make the method an async method, then this is going to pass the database query to a different thread, and it's not going to block the threads where they get request is coming in on.
@@ -57,10 +57,10 @@ A web application focus on social activities. User can register/login/logout. Us
 - SignInManager
 
 ### What is JWT?
-- JWT is Json Web Token. It made up of three parts: header, payloads and signature.
+- JWT is Json Web Token. It is made up of three parts: header, payloads, and signature.
 - The token is sent back to the client in the form of just a long string separated by three periods. This token is passed to the client. Then when the client wants to access a resource on the server it sends this token every time.
 - Keep the token as small as possible because it's going to go along with your request to the API.
-- Signature component the third part of this token, this is what our server uses to verify that this token is valid and hasn't been modified or manipulated in any way. Tokens are signed with a secret key that we stored on the server and we never send to the client, so in order to verify it this token is valid then all our server has to do is to check the secret key that we leave on our server. Compare it to this signature.
+- Signature component the third part of this token, this is what our server uses to verify that this token is valid and hasn't been modified or manipulated in any way. Tokens are signed with a secret key that we stored on the server and we never send to the client, so to verify it this token is valid then all our server has to do is to check the secret key that we leave on our server. Compare it to this signature.
 - The infrastructure project is responsible for the generation of tokens. Anything related to security will run inside the infrastructure project.
 - A [JWT decoder](https://jwt.io/#debugger-io)
 - Authentication (who are you?), Authorization (are you allowed?)
